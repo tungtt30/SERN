@@ -8,16 +8,19 @@ let getHomePage = async (req, res) => {
     } catch (error) {
         console.log('error', error)
     }
-
-
 }
 
 let getTest = (req, res) => {
     return res.render('test/test.ejs')
 }
 
+let getCRUD = (req, res) => {
+    return res.render('crud.ejs')
+}
+
 
 module.exports = {
     getHomePage,
-    getTest
+    getTest,
+    getCRUD,
 }
