@@ -19,7 +19,8 @@ let createNewUser = async (data) => {
                 roleId: data.role,
                 image: data.image
             })
-            resolve('create new user success')
+            let allUser = db.User.findAll
+            resolve(allUser)
         } catch (error) {
             reject(error)
         }
@@ -87,10 +88,29 @@ let updateUserData = (data) => {
     })
 }
 
+let deleteUserById = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await db.User.findOne({
+                where: { id: userId }
+            })
+            if (user) {
+                user.destroy()
+            }
+
+            let allUser = db.User.findAll()
+            resolve(allUser);
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     createNewUser,
     getAllUser,
     getUserInfoById,
     updateUserData,
+    deleteUserById,
 
 }

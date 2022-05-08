@@ -1,5 +1,5 @@
 import db from '../models/index'
-import { createNewUser, getAllUser, getUserInfoById, updateUserData } from '../services/CRUDService'
+import { createNewUser, getAllUser, getUserInfoById, updateUserData, deleteUserById } from '../services/CRUDService'
 
 let getHomePage = async (req, res) => {
     try {
@@ -20,9 +20,8 @@ let getCRUD = (req, res) => {
 }
 
 let postCRUD = async (req, res) => {
-    let message = await createNewUser(req.body)
-    console.log(message)
-    return res.send('successfully')
+    await createNewUser(req.body)
+    return res.render('crud.ejs')
 }
 
 let displayGetCRUD = async (req, res) => {
@@ -48,6 +47,15 @@ let putCRUD = async (req, res) => {
     return res.render('displayCRUD.ejs', { data: allUser })
 }
 
+let deleteCRUD = async (req, res) => {
+    let id = req.query.id
+    let allUser = await deleteUserById(id)
+    return res.render('displayCRUD.ejs', { data: allUser })
+}
+let testAPI = (req, res) => {
+    return res.JSON({ ehe: 'ss' })
+}
+
 
 module.exports = {
     getHomePage,
@@ -56,5 +64,7 @@ module.exports = {
     postCRUD,
     displayGetCRUD,
     getEditCRUD,
-    putCRUD
+    putCRUD,
+    deleteCRUD,
+    testAPI,
 }
