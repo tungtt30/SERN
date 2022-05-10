@@ -21,7 +21,7 @@ initWebRoutes(app);
 
 connectDB();
 
-app.use(cors({origin: true}))
+app.use(cors({allow: 'http://localhost:3000'}))
 
 app.listen(port, () => {
     console.log('server is running on', port)
